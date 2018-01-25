@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>计价规则</title>
+		<style type="text/css">
+			*{color: #666; font-size: 0.9rem;}
+			header{background-color: #fff!important;}
+			header .aui-title{color: #555; font-size: 0.9rem;}
+			header .aui-iconfont{color: #555!important; font-size: 0.9rem!important;}
+			.color{color: #ff9900;}
+			.bg{background: #ff9900;}
+			#valuation_rules{padding: 0 0.5rem;}
+			#valuation_rules .head{font-size: 1rem; line-height: 2rem; margin-top: 0.5rem; text-align: center;}
+			#valuation_rules .title{margin: 0.6rem auto 0.3rem; text-align: center; font-size: 0.75rem; color: #555;}
+			#valuation_rules .title span{width: 1rem; height: 1rem; line-height: 1rem; border-radius: 50%; display: inline-block; text-align: center; color: #fff; margin-right: 0.2rem;}
+			#valuation_rules .info1{overflow: hidden;}
+			table{width: 100%; border-top: 1px solid #ddd; border-left: 1px solid #ddd;}
+			th,td{border-right: 1px solid #ddd;border-bottom: 1px solid #ddd; line-height: 1.3rem; padding: 0.3rem; height: 2rem; text-align: center;}
+			
+			#valuation_rules .hint{line-height: 2rem;}
+			#valuation_rules .middle{position: absolute; top: 50%; margin-top: -10.5px;}
+		</style>
+	</head>
+	<body style="background: #fff;">
+		<div id="valuation_rules">
+			<div class="head color">出行有约合乘计价规则</div>
+			<div>计费说明：根据乘客行程起点终点距离预先计算</div>
+			<div class="title"><span class="bg">1</span>合乘不拼座计价规则</div>
+			<table cellpadding="0" cellspacing="0">
+				<tr><th>人数</th><th>起步费</th><th>公里费</th></tr>
+				<tr><td>1-6人</td><td><span class="color">60元</span><br />(含6公里)</td><td><span class="color">1.5元/公里</span><br />(150公里内)<br /><span class="color">1.4元/公里</span><br />(超过150公里内)</td></tr>
+			</table>
+			<div class="color-gray hint">*为了保障服务平台可能会临时调整</div>
+			<div class="title"><span class="bg">2</span>合乘拼座计价规则</div>
+			<table cellpadding="0" cellspacing="0">
+				<tr><th>人数</th><th>起步费</th><th>公里费</th></tr>
+				<tr><td>1人</td><td><span class="color">60元</span><br />(含6公里)</td><td><span class="color">0.8元/公里</span><br />(150公里内)<br /><span class="color">0.8元/公里</span><br />(超过151公里内)</td></tr>
+				<tr><td>2人</td><td><span class="color">60元</span><br />(含7公里)</td><td><span class="color">0.8元/公里</span><br />(150公里内)<br /><span class="color">0.8元/公里</span><br />(超过152公里内)</td></tr>
+				<tr><td>3人</td><td><span class="color">60元</span><br />(含8公里)</td><td><span class="color">0.8元/公里</span><br />(150公里内)<br /><span class="color">0.8元/公里</span><br />(超过153公里内)</td></tr>
+				<tr><td>4人</td><td><span class="color">60元</span><br />(含9公里)</td><td><span class="color">0.8元/公里</span><br />(150公里内)<br /><span class="color">0.8元/公里</span><br />(超过154公里内)</td></tr>
+				<tr><td>5人</td><td><span class="color">60元</span><br />(含10公里)</td><td><span class="color">0.8元/公里</span><br />(150公里内)<br /><span class="color">0.8元/公里</span><br />(超过155公里内)</td></tr>
+				<tr><td>6人</td><td><span class="color">60元</span><br />(含11公里)</td><td><span class="color">0.8元/公里</span><br />(150公里内)<br /><span class="color">0.8元/公里</span><br />(超过156公里内)</td></tr>
+			</table>
+			<div class="color-gray hint">*为了保障服务平台可能会临时调整</div>
+		</div>
+	</body>
+</html>

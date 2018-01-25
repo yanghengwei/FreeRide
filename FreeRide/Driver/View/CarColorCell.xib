@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CarColorCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79g-p8-eC2">
+                        <rect key="frame" x="126" y="0.0" width="69" height="44"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tn5-e8-0FR">
+                                <rect key="frame" x="0.0" y="17" width="10" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="ULt-N1-KRe"/>
+                                    <constraint firstAttribute="width" secondItem="Tn5-e8-0FR" secondAttribute="height" multiplier="1:1" id="f4M-J1-L1F"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银灰色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eft-5n-rn0">
+                                <rect key="frame" x="26" y="13.5" width="43" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eft-5n-rn0" firstAttribute="leading" secondItem="Tn5-e8-0FR" secondAttribute="trailing" constant="16" id="0N0-rZ-PsI"/>
+                            <constraint firstItem="Tn5-e8-0FR" firstAttribute="leading" secondItem="79g-p8-eC2" secondAttribute="leading" id="Ez7-tQ-8jQ"/>
+                            <constraint firstItem="eft-5n-rn0" firstAttribute="centerY" secondItem="79g-p8-eC2" secondAttribute="centerY" id="W0L-cp-ifu"/>
+                            <constraint firstAttribute="trailing" secondItem="eft-5n-rn0" secondAttribute="trailing" id="mKU-OK-twa"/>
+                            <constraint firstAttribute="height" constant="44" id="s8q-VG-H32"/>
+                            <constraint firstItem="Tn5-e8-0FR" firstAttribute="centerY" secondItem="79g-p8-eC2" secondAttribute="centerY" id="wv0-XG-MPI"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b6V-IZ-8Ta">
+                        <rect key="frame" x="282" y="17.5" width="13" height="9"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="13" id="Ef6-Ii-Zvq"/>
+                            <constraint firstAttribute="width" secondItem="b6V-IZ-8Ta" secondAttribute="height" multiplier="34:24" id="jll-EQ-uI9"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="b6V-IZ-8Ta" secondAttribute="trailing" constant="25" id="F9Q-Oz-FQa"/>
+                    <constraint firstItem="79g-p8-eC2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PF1-MA-hIQ"/>
+                    <constraint firstItem="b6V-IZ-8Ta" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZCQ-wJ-jIb"/>
+                    <constraint firstItem="79g-p8-eC2" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="wjC-XM-BHJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="colorImageView" destination="Tn5-e8-0FR" id="To1-g1-UMh"/>
+                <outlet property="infoLabel" destination="eft-5n-rn0" id="YZu-iI-Vzp"/>
+                <outlet property="isselectedImageView" destination="b6V-IZ-8Ta" id="4nw-Bz-LjU"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

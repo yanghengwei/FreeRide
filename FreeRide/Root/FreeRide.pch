@@ -1,0 +1,29 @@
+//
+//  FreeRide.pch
+//  FreeRide
+//
+//  Created by yang on 2018/1/17.
+//  Copyright © 2018年 pc. All rights reserved.
+//
+
+#ifndef FreeRide_pch
+#define FreeRide_pch
+
+
+#define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEGHT  [UIScreen mainScreen].bounds.size.height
+
+
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+//#import <Masonry.h>
+#import <AMapNaviKit/AMapNaviKit.h>
+
+//#import "XYQProgressHUD.h"
+//#import "XYQProgressHUD+XYQ.h"
+#import "UIImageView+WebCache.h"
+
+
+#endif /* FreeRide_pch */

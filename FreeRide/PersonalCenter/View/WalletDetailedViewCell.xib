@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WalletDetailedViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-05-06  15:46:36" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92P-h9-cgb">
+                        <rect key="frame" x="12" y="28" width="208" height="26.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-68.3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2P-sy-fyo">
+                        <rect key="frame" x="130" y="5" width="175" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.56470588239999997" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="159****1234" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-hK-swm">
+                        <rect key="frame" x="130" y="36.5" width="175" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付车费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5H-ao-Nuj">
+                        <rect key="frame" x="12" y="5" width="208" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="92P-h9-cgb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="0cF-BY-kbh"/>
+                    <constraint firstItem="q2P-sy-fyo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="0f0-ql-HMh"/>
+                    <constraint firstAttribute="bottom" secondItem="92P-h9-cgb" secondAttribute="bottom" constant="5" id="1da-Bw-ihq"/>
+                    <constraint firstAttribute="trailing" secondItem="9NQ-hK-swm" secondAttribute="trailing" constant="15" id="2Nm-at-ZAS"/>
+                    <constraint firstItem="92P-h9-cgb" firstAttribute="width" secondItem="B5H-ao-Nuj" secondAttribute="width" id="2mP-HH-SFi"/>
+                    <constraint firstItem="92P-h9-cgb" firstAttribute="height" secondItem="B5H-ao-Nuj" secondAttribute="height" id="2tN-wR-ehN"/>
+                    <constraint firstItem="q2P-sy-fyo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="130" id="3hF-ZJ-Io3"/>
+                    <constraint firstItem="9NQ-hK-swm" firstAttribute="height" secondItem="q2P-sy-fyo" secondAttribute="height" id="CJ2-Ln-Ran"/>
+                    <constraint firstAttribute="trailing" secondItem="q2P-sy-fyo" secondAttribute="trailing" constant="15" id="L57-Sz-2tW"/>
+                    <constraint firstItem="B5H-ao-Nuj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Q9Z-gl-z3N"/>
+                    <constraint firstItem="92P-h9-cgb" firstAttribute="top" secondItem="B5H-ao-Nuj" secondAttribute="bottom" constant="-4" id="YIR-WP-u2X"/>
+                    <constraint firstItem="B5H-ao-Nuj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="c45-RO-aZ2"/>
+                    <constraint firstAttribute="trailing" secondItem="B5H-ao-Nuj" secondAttribute="trailing" constant="100" id="cU9-4T-LQ5"/>
+                    <constraint firstAttribute="bottom" secondItem="9NQ-hK-swm" secondAttribute="bottom" constant="5" id="ghm-hl-vgV"/>
+                    <constraint firstItem="9NQ-hK-swm" firstAttribute="width" secondItem="q2P-sy-fyo" secondAttribute="width" id="yUJ-Ho-TYU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="moneyLabel" destination="q2P-sy-fyo" id="frf-y3-sdk"/>
+                <outlet property="phoneLabel" destination="9NQ-hK-swm" id="fqh-hs-Rrl"/>
+                <outlet property="timeLabel" destination="92P-h9-cgb" id="IVS-VY-GYF"/>
+                <outlet property="typeLabel" destination="B5H-ao-Nuj" id="fAs-V4-FKQ"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
