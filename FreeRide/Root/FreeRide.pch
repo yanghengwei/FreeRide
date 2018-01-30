@@ -18,7 +18,7 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-//#import <Masonry.h>
+#import "Masonry.h"
 #import <AMapNaviKit/AMapNaviKit.h>
 
 //#import "XYQProgressHUD.h"

@@ -34,7 +34,16 @@
     return self;
 }
 - (void)createUI {
-    mainView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-XMAKENEW(439), self.frame.size.width, XMAKENEW(439))];
+    blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    blackView.backgroundColor = [UIColor blackColor];
+    blackView.alpha = 0.7;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chooseTapToCityDetail:)];
+    tap.numberOfTapsRequired = 1;
+    tap.numberOfTouchesRequired = 1;
+    [blackView addGestureRecognizer:tap];
+    [self addSubview:blackView];
+    
+    mainView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, XMAKENEW(439))];
     mainView.backgroundColor = [UIColor whiteColor];
     [self addSubview:mainView];
     
@@ -102,14 +111,9 @@
     footLabel.textAlignment = NSTextAlignmentCenter;
     [footHelpView addSubview:footLabel];
     
-    blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-mainView.frame.size.height)];
-    blackView.backgroundColor = [UIColor blackColor];
-    blackView.alpha = 0.7;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chooseTapToCityDetail:)];
-    tap.numberOfTapsRequired = 1;
-    tap.numberOfTouchesRequired = 1;
-    [blackView addGestureRecognizer:tap];
-    [self addSubview:blackView];
+    [UIView animateWithDuration:0.3 animations:^{
+        mainView.frame = CGRectMake(0, self.frame.size.height-XMAKENEW(439), self.frame.size.width, XMAKENEW(439));
+    }];
 }
 - (void)btnTarget:(UIButton *)button {
     if (button.tag == 1314) {
@@ -122,20 +126,25 @@
 }
 - (void)changeView:(NSString *)backInfo {
     [rightBtn setTitleColor:COLOR_ORANGE forState:UIControlStateNormal];
-    if ([backInfo isEqualToString:@"4"]) {
-        evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(190));
-    } else if (backInfo.length == 1){
-        evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(220));
-    } else {
-        NSLog(@"%@",backInfo);
-    }
-    footView.frame = CGRectMake(0, headView.frame.size.height+evaView.frame.size.height, headView.frame.size.width, XMAKENEW(175));
-    mainView.frame = CGRectMake(0, self.frame.size.height-(headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height), self.frame.size.width, headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height);
-    blackView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-mainView.frame.size.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        if ([backInfo isEqualToString:@"4"]) {
+            evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(190));
+        } else if (backInfo.length == 1){
+            evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(220));
+        } else {
+            NSLog(@"%@",backInfo);
+        }
+        footView.frame = CGRectMake(0, headView.frame.size.height+evaView.frame.size.height, headView.frame.size.width, XMAKENEW(175));
+        mainView.frame = CGRectMake(0, self.frame.size.height-(headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height), self.frame.size.width, headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height);
+    }];
 }
 - (void)chooseTapToCityDetail:(UITapGestureRecognizer*)tap {
-    NSLog(@"点击取消手势");
-    [self removeFromSuperview];
+    [UIView animateWithDuration:0.3 animations:^{
+        mainView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, XMAKENEW(439));
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+    
 }
 -(BOOL)textViewShouldReturn:(UITextView *)textView{
     [textView resignFirstResponder];

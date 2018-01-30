@@ -137,8 +137,8 @@
     }
     if (text1.text.length > 0 && text2.text.length > 0) {
 #warning NONet
-        [self loginAndAction:@{@"key":@"1",@"phone":@"1",@"id":@"1"}];
-//        [self netWorking:@{@"phone":text1.text,@"password":text2.text}];
+//        [self loginAndAction:@{@"key":@"1",@"phone":@"1",@"id":@"1"}];
+        [self netWorking:@{@"phone":text1.text,@"password":text2.text}];
     } else {
         [SomeSupprt createUIAlertWithMessage:@"手机号或者密码为空" andDisappearTime:0.8];
     }

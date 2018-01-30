@@ -1,9 +1,9 @@
 //
 //  NetworkTool.m
-//  XHH_networkTool
+//  FreeRide
 //
-//  Created by xiaohuihui on 2016/11/26.
-//  Copyright © 2016年 30-陈辉华. All rights reserved.
+//  Created by  on 2017/11/21.
+//  Copyright © 2017年 JNR All rights reserved.
 //
 
 #import "NetworkTool.h"

@@ -10,7 +10,9 @@
 #import "Header.h"
 
 @interface PickView () <UIPickerViewDataSource,UIPickerViewDelegate>
-
+{
+    UIView *whithView;
+}
 @property (strong, nonatomic)  UIPickerView *pickerView;
 
 
@@ -41,7 +43,7 @@
     }
 }
 - (void)setPickView {
-    UIView *backgroudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-XMAKENEW(260))];
+    UIView *backgroudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     backgroudView.backgroundColor = [UIColor blackColor];
     backgroudView.alpha = 0.7;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chooseTapToCityDetail:)];
@@ -50,7 +52,7 @@
     [backgroudView addGestureRecognizer:tap];
     [self addSubview:backgroudView];
     
-    UIView *whithView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(backgroudView.frame), self.frame.size.width, self.frame.size.height-CGRectGetMaxY(backgroudView.frame))];
+    whithView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, XMAKENEW(260))];
     whithView.backgroundColor = [UIColor whiteColor];
     NSArray *btnInfoArr = @[@{@"title":@"取消",@"titleColor":@"COLOR_TEXT_NORMAL"},@{@"title":@"确定",@"titleColor":@"COLOR_ORANGE"}];
     for (int i = 0; i < 2; i++) {
@@ -82,6 +84,11 @@
     _pickerView.dataSource = self;
     [whithView addSubview:_pickerView];
     [self addSubview:whithView];
+    [UIView animateWithDuration:0.2 animations:^{
+        whithView.frame = CGRectMake(0, self.frame.size.height-XMAKENEW(260), self.frame.size.width, XMAKENEW(260));
+    } completion:^(BOOL finished) {
+//        [self removeFromSuperview];
+    }];
 }
 #pragma mark - pickerView数据源协议方法
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -112,10 +119,14 @@
         }
         self.pickBlock(_selectInfo);
     }
-    [self removeFromSuperview];
+    [self chooseTapToCityDetail:nil];
 }
 - (void)chooseTapToCityDetail:(UITapGestureRecognizer*)tap {
-    NSLog(@"点击取消手势");
-    [self removeFromSuperview];
+    [UIView animateWithDuration:0.2 animations:^{
+        whithView.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, 0);
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+    
 }
 @end

@@ -143,17 +143,19 @@
         }
     }
     labeb.textColor = COLOR_ORANGE;
-    if (button.tag == 994 && selecteBtnTag!=994) {
-        longView.hidden = YES;
-        shortView.hidden = NO;
-        self.block(_bestString);
-    } else if (selecteBtnTag==994&&button.tag!=994) {
-        longView.hidden = NO;
-        shortView.hidden = YES;
-        self.block(_btnStings);
-    } else {
-        self.block(_btnStings);
-    }
+    [UIView animateWithDuration:0.3 animations:^{
+        if (button.tag == 994 && selecteBtnTag!=994) {
+            longView.hidden = YES;
+            shortView.hidden = NO;
+            self.block(_bestString);
+        } else if (selecteBtnTag==994&&button.tag!=994) {
+            longView.hidden = NO;
+            shortView.hidden = YES;
+            self.block(_btnStings);
+        } else {
+            self.block(_btnStings);
+        }
+    }];
     selecteBtnTag = button.tag;
 }
 @end

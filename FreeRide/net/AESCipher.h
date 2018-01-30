@@ -1,11 +1,9 @@
 //
-//  AESCipher.h
-//  AESCipher
+//  AESCipher.m
+//  FreeRide
 //
-//  Created by Welkin Xie on 8/13/16.
-//  Copyright © 2016 WelkinXie. All rights reserved.
-//
-//  https://github.com/WelkinXie/AESCipher-iOS
+//  Created by  on 2017/11/21.
+//  Copyright © 2017年 JNR All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
