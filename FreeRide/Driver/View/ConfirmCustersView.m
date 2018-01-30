@@ -65,6 +65,10 @@
             subView.tag = 666+i*10+j;
             [custem addSubview:subView];
         }
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XMAKENEW(20), XMAKENEW(20))];
+        imageView.image = [UIImage imageNamed:@"more_icon"];
+        imageView.center = CGPointMake(custem.center.x, XMAKENEW(50)+XMAKENEW(100)*i);
+        [custem addSubview:imageView];
     }
     
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(custem.frame)+XMAKENEW(20), mainView.frame.size.width, XMAKENEW(60))];
@@ -75,17 +79,33 @@
     footLabel.font = [UIFont systemFontOfSize:14];
     [footView addSubview:footLabel];
     
-    NSArray *arr = @[@{@"name":@"取消",@"color":COLOR_ORANGE},@{@"name":@"取消",@"color":COLOR_ORANGE}];
+    NSArray *arr = @[@{@"name":@"取消",@"color":[UIColor whiteColor]},@{@"name":@"确定",@"color":COLOR_ORANGE}];
     for (int i = 0; i < 2; i++) {
         UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, mainView.frame.size.width/3, XMAKENEW(30))];
         [leftBtn setTitle:[arr[i] objectForKey:@"name"] forState:UIControlStateNormal];
         [leftBtn setBackgroundColor:[arr[i] objectForKey:@"color"]];
-        leftBtn.center = CGPointMake(mainView.frame.size.width/4*(1+2*i), CGRectGetMaxY(footLabel.frame)+XMAKENEW(15));
+        [leftBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
+        [leftBtn.layer setCornerRadius:3];
+        [leftBtn.layer setBorderColor:COLOR_ORANGE.CGColor];
+        [leftBtn.layer setBorderWidth:1];
+        leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        leftBtn.center = CGPointMake(mainView.frame.size.width/4*(1+2*i), CGRectGetMaxY(footLabel.frame)+XMAKENEW(17));
+        if (i == 0) {
+            [leftBtn setTitleColor:COLOR_ORANGE forState:UIControlStateNormal];
+        }
+        [leftBtn addTarget:self action:@selector(addTargets:) forControlEvents:UIControlEventTouchUpInside];
         [footView addSubview:leftBtn];
     }
 }
 - (void)chooseTapToCityDetail:(UITapGestureRecognizer*)tap {
     [self removeFromSuperview];
 }
-
+- (void)addTargets:(UIButton *)button {
+    if ([button.titleLabel.text isEqualToString:@"取消"]) {
+        
+    } else {
+        NSLog(@"点击确定");
+    }
+    [self chooseTapToCityDetail:nil];
+}
 @end

@@ -13,6 +13,7 @@
 #import "MainTableController.h"
 #import "FRReleaseController.h"
 #import "TheOrderController.h"
+#import "ConfirmCustersView.h"
 
 @interface DriverController () <UITableViewDelegate, UITableViewDataSource>
 {
@@ -33,6 +34,10 @@
     [self tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"DriverCell" bundle:nil] forCellReuseIdentifier:@"DriverCell"];
     [self tableData];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    ConfirmCustersView *vc = [[ConfirmCustersView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:vc];
 }
 - (void)createNavi {
     UIView *navi = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 48)];
@@ -200,15 +205,16 @@
     nameLabel.adjustsFontSizeToFitWidth = YES;
     [headView addSubview:nameLabel];
     //司机性别
-    UIImageView *maleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame), CGRectGetMinY(nameLabel.frame), nameLabel.frame.size.height, nameLabel.frame.size.height)];
-    maleImageView.image = [UIImage imageNamed:@"female"];
+    UIImageView *maleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame), CGRectGetMinY(nameLabel.frame)+XMAKENEW(5), nameLabel.frame.size.height-XMAKENEW(8), nameLabel.frame.size.height-XMAKENEW(8))];
+    maleImageView.image = [UIImage imageNamed:@"boy"];
     [headView addSubview:maleImageView];
     //司机车牌
-    UILabel *carIdLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(maleImageView.frame), CGRectGetMinY(maleImageView.frame)+2, XMAKENEW(60), maleImageView.frame.size.height-4)];
+    UILabel *carIdLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(maleImageView.frame), CGRectGetMinY(nameLabel.frame)+4.5, XMAKENEW(65), maleImageView.frame.size.height)];
     carIdLabel.text = @"晋A66666";
+    carIdLabel.adjustsFontSizeToFitWidth = YES;
     carIdLabel.backgroundColor = COLOR_TEXT_LIGHT;
     carIdLabel.textColor = COLOR_TEXT_DARK;
-    carIdLabel.font = [UIFont systemFontOfSize:FONT12];
+//    carIdLabel.font = [UIFont systemFontOfSize:FONT12];
     [headView addSubview:carIdLabel];
     //汽车信息
     UILabel *carInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(nameLabel.frame), CGRectGetMaxY(nameLabel.frame)-YMAKENEW(3), self.view.frame.size.width, nameLabel.frame.size.height)];
