@@ -31,28 +31,23 @@
     [phoneBtn setImage:[UIImage imageNamed:@"telephone"] forState:UIControlStateNormal];
     [phoneBtn addTarget:self action:@selector(payPhone:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:phoneBtn];
-    //订单状态
-    UILabel *stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+XMAKENEW(150), CGRectGetMaxY(phoneBtn.frame)+XMAKENEW(23), XMAKENEW(150), phoneBtn.frame.size.height)];
-    stateLabel.textColor = COLOR_ORANGE;
-    stateLabel.text = @"行驶结束，待评价";
-    stateLabel.textAlignment = NSTextAlignmentRight;
-    stateLabel.font = [UIFont systemFontOfSize:12];
-    [self addSubview:stateLabel];
+    
     //司机姓名
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+XMAKENEW(5), CGRectGetMinY(imageView.frame)-1, XMAKENEW(45), 20)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+XMAKENEW(5), CGRectGetMinY(imageView.frame)-XMAKENEW(7), XMAKENEW(45), 20)];
     nameLabel.text = @"吴师傅";
     nameLabel.adjustsFontSizeToFitWidth = YES;
     [self addSubview:nameLabel];
     //司机性别
-    UIImageView *maleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame), CGRectGetMinY(nameLabel.frame), nameLabel.frame.size.height, nameLabel.frame.size.height)];
-    maleImageView.image = [UIImage imageNamed:@"female"];
+    UIImageView *maleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame), CGRectGetMinY(nameLabel.frame)+5, nameLabel.frame.size.height-XMAKENEW(8), nameLabel.frame.size.height-XMAKENEW(8))];
+    maleImageView.image = [UIImage imageNamed:@"boy"];
     [self addSubview:maleImageView];
     //司机车牌
-    UILabel *carIdLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(maleImageView.frame), CGRectGetMinY(maleImageView.frame)+2, XMAKENEW(60), maleImageView.frame.size.height-4)];
+    UILabel *carIdLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(maleImageView.frame), CGRectGetMinY(maleImageView.frame), XMAKENEW(60), maleImageView.frame.size.height)];
     carIdLabel.text = @"晋A66666";
     carIdLabel.backgroundColor = COLOR_TEXT_LIGHT;
     carIdLabel.textColor = COLOR_TEXT_DARK;
     carIdLabel.font = [UIFont systemFontOfSize:FONT12];
+    carIdLabel.adjustsFontSizeToFitWidth = YES;
     [self addSubview:carIdLabel];
     //汽车信息
     UILabel *carInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(nameLabel.frame), CGRectGetMaxY(nameLabel.frame)-XMAKENEW(3), self.frame.size.width, nameLabel.frame.size.height)];
@@ -61,10 +56,17 @@
     carInfoLabel.font = [UIFont systemFontOfSize:FONT12];
     [self addSubview:carInfoLabel];
     //线
-    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(XMAKENEW(12), CGRectGetMaxY(imageView.frame)+XMAKENEW(5), self.frame.size.width-XMAKENEW(24), 1)];
+    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(XMAKENEW(12), CGRectGetMaxY(imageView.frame)+XMAKENEW(8), self.frame.size.width-XMAKENEW(24), 1)];
     line.backgroundColor = COLOR_background;
     [self addSubview:line];
     
+    //订单状态
+    UILabel *stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+XMAKENEW(150), CGRectGetMaxY(line.frame)+XMAKENEW(20), XMAKENEW(150), phoneBtn.frame.size.height)];
+    stateLabel.textColor = COLOR_ORANGE;
+    stateLabel.text = @"行驶结束，待评价";
+    stateLabel.textAlignment = NSTextAlignmentRight;
+    stateLabel.font = [UIFont systemFontOfSize:12];
+    [self addSubview:stateLabel];
     //行程信息
     NSArray *imageNameArr = @[@"time",@"start_eidt",@"end_eidt"];
     NSArray *labelText = @[@"今天10:00-10:30  4人拼座",@"太原市万国城MOMA",@"朔州市市政府"];
@@ -82,6 +84,9 @@
     }
 }
 - (void)payPhone:(UIButton *)button {
+    UIWebView * callWebview = [[UIWebView alloc]init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:13312312311"]]];
+    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
     NSLog(@"拨打司机电话");
 }
 @end

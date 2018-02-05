@@ -21,19 +21,21 @@
     UILabel *placeholderlab;
     UIButton *rightBtn;
 }
+@property (nonatomic, strong) NSMutableDictionary *upDic;
 @end
 
 @implementation EvaluationChooseView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame andData:(NSDictionary *)data {
     self = [super initWithFrame:frame];
     if (self) {
-        [self createUI];
+        [self createUI:data];
         [self addNoticeForKeyboard];
     }
     return self;
 }
-- (void)createUI {
+- (void)createUI:(NSDictionary *)data {
+    _upDic = [[NSMutableDictionary alloc] initWithDictionary:data];
     blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     blackView.backgroundColor = [UIColor blackColor];
     blackView.alpha = 0.7;
@@ -76,7 +78,13 @@
     line.backgroundColor = COLOR_background;
     [headView addSubview:line];
     
-     evaView= [[EvaluationView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(220))];
+    NSString *string;
+    if ([data objectForKey:@"buttonString"]) {
+        string = [data objectForKey:@"buttonString"];
+    } else {
+        string = @"";
+    }
+    evaView= [[EvaluationView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(220)) andString:string];
     __weak typeof(self) weakSelf = self;
     evaView.block = ^(NSString *backInfo) {
         [weakSelf changeView:backInfo];
@@ -90,15 +98,17 @@
     textView = [[UITextView alloc] initWithFrame:CGRectMake(XMAKENEW(50), XMAKENEW(10), XMAKENEW(275), XMAKENEW(70))];
     textView.backgroundColor = COLOR_background;
     textView.delegate = self;
-    placeholderlab=[[UILabel alloc]initWithFrame:CGRectMake(XMAKENEW(10), 10, self.frame.size.width, 20)];
+    placeholderlab=[[UILabel alloc]initWithFrame:CGRectMake(XMAKENEW(5), 5, self.frame.size.width, 20)];
     placeholderlab.text=@"其他意见或建议（您的评论将匿名提交）";
     placeholderlab.textColor=COLOR_TEXT_LIGHT;
     placeholderlab.textAlignment=NSTextAlignmentLeft;
-    placeholderlab.font=[UIFont systemFontOfSize:13.0f];
+    placeholderlab.font=[UIFont systemFontOfSize:12];
     [textView addSubview:placeholderlab];
     [footView addSubview:textView];
     
     UIView *footHelpView = [[UIView alloc] initWithFrame:CGRectMake(XMAKENEW(150), CGRectGetMaxY(textView.frame), XMAKENEW(75), XMAKENEW(75))];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(customerervice:)];
+    [footHelpView addGestureRecognizer:tap1];
     [footView addSubview:footHelpView];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(XMAKENEW(20), XMAKENEW(15), XMAKENEW(35), XMAKENEW(35))];
     imageView.image = [UIImage imageNamed:@"customerservice"];
@@ -110,10 +120,27 @@
     footLabel.font = [UIFont systemFontOfSize:FONT12];
     footLabel.textAlignment = NSTextAlignmentCenter;
     [footHelpView addSubview:footLabel];
-    
+    if ([data objectForKey:@"buttonString"]) {
+        rightBtn.hidden = YES;
+        evaView.userInteractionEnabled = NO;
+        textView.userInteractionEnabled = NO;
+        placeholderlab.hidden = YES;
+    }
+    if ([data objectForKey:@"opinion"]) {
+        textView.text = [data objectForKey:@"opinion"];
+    }
     [UIView animateWithDuration:0.3 animations:^{
-        mainView.frame = CGRectMake(0, self.frame.size.height-XMAKENEW(439), self.frame.size.width, XMAKENEW(439));
+        if ([[[data objectForKey:@"buttonString"] substringToIndex:3] isEqualToString:@"994"]) {
+            evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(190));
+        }
+        footView.frame = CGRectMake(0, headView.frame.size.height+evaView.frame.size.height, headView.frame.size.width, XMAKENEW(175));
+        mainView.frame = CGRectMake(0, self.frame.size.height-(headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height), self.frame.size.width, headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height);
     }];
+}
+- (void)customerervice:(UITapGestureRecognizer*)tap {
+    UIWebView * callWebview = [[UIWebView alloc]init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:96508"]]];
+    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
 }
 - (void)btnTarget:(UIButton *)button {
     if (button.tag == 1314) {
@@ -121,19 +148,23 @@
     } else {
         if ([button.titleLabel.textColor isEqual:COLOR_ORANGE]) {
             NSLog(@"提交");
+            [_upDic setObject:textView.text forKey:@"opinion"];
+            self.blockInfo(_upDic);
+            [self chooseTapToCityDetail:nil];
         }
     }
 }
 - (void)changeView:(NSString *)backInfo {
     [rightBtn setTitleColor:COLOR_ORANGE forState:UIControlStateNormal];
     [UIView animateWithDuration:0.3 animations:^{
-        if ([backInfo isEqualToString:@"4"]) {
+        if ([[backInfo substringToIndex:3] isEqualToString:@"994"]) {
             evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(190));
-        } else if (backInfo.length == 1){
+        } else/* if (backInfo.length == 1)*/{
             evaView.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, XMAKENEW(220));
-        } else {
-            NSLog(@"%@",backInfo);
+//        } else {
+//            NSLog(@"%@",backInfo);
         }
+        [_upDic setObject:backInfo forKey:@"buttonString"];
         footView.frame = CGRectMake(0, headView.frame.size.height+evaView.frame.size.height, headView.frame.size.width, XMAKENEW(175));
         mainView.frame = CGRectMake(0, self.frame.size.height-(headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height), self.frame.size.width, headView.frame.size.height+evaView.frame.size.height+footView.frame.size.height);
     }];

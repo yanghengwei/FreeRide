@@ -60,17 +60,17 @@
 - (NSMutableArray *)tableData {
     if (!_tableData) {
         _tableData = [[NSMutableArray alloc] init];
-        NSArray *arr = @[@"重置登录密码",@"重置支付密码",@"",@"版本更新",@"关于我们",@""];
+        NSArray *arr = @[@"重置登录密码"/*,@"重置支付密码"*/,@"",@"版本更新",@"关于我们",@""];
         [_tableData addObjectsFromArray:arr];
     }
     [_tableView reloadData];
     return _tableData;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return _tableData.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2 || indexPath.row == 5) {
+    if (indexPath.row == 1 || indexPath.row == 4) {
         return 8;
     }
     return 44;
@@ -84,25 +84,28 @@
     cell.textLabel.text = _tableData[indexPath.row];
     cell.textLabel.textColor = COLOR_TEXT_DARK;
     cell.textLabel.font = [UIFont systemFontOfSize:13];
-    if (indexPath.section == 3) {
+    if (indexPath.row == 2) {
         cell.detailTextLabel.text = @"V0.0.1";
-        cell.detailTextLabel.textColor = COLOR_TEXT_DARK;
+        cell.detailTextLabel.textColor = COLOR_ORANGE;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
-    } else if (indexPath.row == 2 || indexPath.row == 5) {
+    } else if (indexPath.row == 1 || indexPath.row == 4) {
         cell.backgroundColor = COLOR_background;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (UIView *)createFootView {
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, XMAKENEW(40))];
-    footer.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, footer.frame.size.height)];
-    [btn setTitle:@"退出" forState:UIControlStateNormal];
-    [btn setTitleColor:COLOR_ORANGE forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(exctBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [footer addSubview:btn];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, XMAKENEW(100))];
+    //登录
+    UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(XMAKENEW(12.5), YMAKENEW(20), XMAKENEW(350), YMAKENEW(40))];
+    [loginBtn setTitle:@"退出" forState:UIControlStateNormal];
+    [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    loginBtn.backgroundColor = COLOR_ORANGE;
+    loginBtn.layer.cornerRadius = 3.0;//2.0是圆角的弧度，根据需求自己更改
+    loginBtn.layer.borderColor = (__bridge CGColorRef _Nullable)(COLOR_ORANGE);//设置边框颜色
+    loginBtn.layer.borderWidth = 0.5f;//设置边框颜色
+    [footer addSubview:loginBtn];
+    [loginBtn addTarget:self action:@selector(exctBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     return footer;
 }

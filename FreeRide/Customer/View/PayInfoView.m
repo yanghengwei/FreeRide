@@ -85,6 +85,9 @@
         [btn setImage:[UIImage imageNamed:@"Selected"] forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(chooseBtn:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:btn];
+        if (![type isEqualToString:@"long"] && i == 1) {
+            titleLbl.hidden = YES;
+        }
     }
     if (/*[_moneyDic objectForKey:@"vacancies"]<[_moneyDic objectForKey:@"money"]*/1) {
         UILabel *labl = [self viewWithTag:10000];
@@ -105,6 +108,7 @@
     UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height, self.frame.size.width, XMAKENEW(300))];
     whiteView.backgroundColor = [UIColor whiteColor];
     [self addSubview:whiteView];
+    
 }
 - (void)chooseBtn:(UIButton *)button {
     UIButton *btn1 = [self viewWithTag:1000];

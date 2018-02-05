@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^Block)(NSDictionary *backInfo);
+
 @interface EvaluationChooseView : UIView
+- (instancetype)initWithFrame:(CGRect)frame andData:(NSDictionary *)data;
+
+@property (nonatomic, copy) Block blockInfo;
 
 @end

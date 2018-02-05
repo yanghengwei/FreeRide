@@ -24,22 +24,26 @@
 
 @implementation EvaluationView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame andString:(NSString *)data {
     self = [super initWithFrame:frame];
     if (self) {
-        [self createUI];
+        [self createUI:data];
     }
     return self;
 }
-- (void)createUI {
+- (void)createUI:(NSString *)string {
     _btnStings = [[NSMutableString alloc] init];
     _bestString = [[NSMutableString alloc] init];
+    NSArray *labelText = @[@"非常不满意，各方面都差",@"不满意，比较差",@"一般，仍需改善",@"比较满意，再接再厉",@"非常满意，无可挑剔"];
     for (int i = 0; i < 5; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2+(i-2.5)*BtnWidth, 10, BtnWidth, BtnWidth)];
         [button setImage:[UIImage imageNamed:@"star_nor"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"star_sel"] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(setBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 990+i;
+        if (string.length > 0 && !([[string substringToIndex:3] longLongValue] < button.tag)) {
+            button.selected = YES;
+        }
         [self addSubview:button];
     }
     labeb = [[UILabel alloc] initWithFrame:CGRectMake(0, 8+BtnWidth, self.frame.size.width, XMAKENEW(25))];
@@ -48,11 +52,15 @@
     labeb.tag = 10001;
     labeb.font = [UIFont systemFontOfSize:FONT12];
     labeb.textColor = COLOR_TEXT_NORMAL;
+    if (string.length > 0) {
+        labeb.text = labelText[[[string substringToIndex:3] longLongValue]-990];
+        labeb.textColor = COLOR_ORANGE;
+    }
     [self addSubview:labeb];
-    [self setLongView];
-    [self cgreateShortView];
+    [self setLongView:string];
+    [self cgreateShortView:string];
 }
-- (void)setLongView {
+- (void)setLongView:(NSString *)string {
     UILabel *label = [self viewWithTag:10001];
     longView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label.frame)+XMAKENEW(10), self.frame.size.width, XMAKENEW(150))];
     [self addSubview:longView];
@@ -76,10 +84,17 @@
             btn.tag = 230+i;
             [btn addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
             [longView addSubview:btn];
+            if (string.length >0 && !([string rangeOfString:btnName[i][j]].location == NSNotFound)) {
+                btn.selected = YES;
+                [btn.layer setBorderColor:COLOR_ORANGE.CGColor];
+            }
         }
     }
+    if (string.length > 0 && [[string substringToIndex:3] isEqualToString:@"994"]) {
+        longView.hidden = YES;
+    }
 }
-- (void)cgreateShortView {
+- (void)cgreateShortView:(NSString *)string {
     shortView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(longView.frame), self.frame.size.width, XMAKENEW(100))];
     [self addSubview:shortView];
     NSArray *btnName = @[@[@"准时专业",@"拾金不昧"],@[@"服务好态度棒",@"车内整洁"],@[@"活地图认路准",@"等候耐心"]];
@@ -97,9 +112,17 @@
             btn.tag = 330+i;
             [btn addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
             [shortView addSubview:btn];
+            if (string.length >0 && !([string rangeOfString:btnName[i][j]].location == NSNotFound)) {
+                btn.selected = YES;
+                [btn.layer setBorderColor:COLOR_ORANGE.CGColor];
+            }
         }
     }
     shortView.hidden = YES;
+    if (string.length > 0 && [[string substringToIndex:3] isEqualToString:@"994"]) {
+        shortView.hidden = NO;
+    }
+    
 }
 - (void)btnSelected:(UIButton *)button {
     UIButton *btn = [self viewWithTag:990];
@@ -131,7 +154,7 @@
     }
 }
 - (void)setBtnSelected:(UIButton *)button {
-    self.block([NSString stringWithFormat:@"%ld",button.tag-990]);
+//    self.block([NSString stringWithFormat:@"%ld",button.tag-990]);
     NSArray *labelText = @[@"非常不满意，各方面都差",@"不满意，比较差",@"一般，仍需改善",@"比较满意，再接再厉",@"非常满意，无可挑剔"];
     for (int i = 0; i < 5; i++) {
         UIButton *btn = [self viewWithTag:990+i];
@@ -147,12 +170,27 @@
         if (button.tag == 994 && selecteBtnTag!=994) {
             longView.hidden = YES;
             shortView.hidden = NO;
+            if (_bestString.length > 0) {
+                _bestString = [_bestString stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%ld", (long)selecteBtnTag] withString:[NSString stringWithFormat:@"%ld", (long)button.tag]];
+            } else {
+                _bestString = [NSString stringWithFormat:@"%ld", (long)button.tag];
+            }
             self.block(_bestString);
         } else if (selecteBtnTag==994&&button.tag!=994) {
             longView.hidden = NO;
             shortView.hidden = YES;
+            if (_btnStings.length > 0) {
+                _btnStings = [_btnStings stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%ld", (long)selecteBtnTag] withString:[NSString stringWithFormat:@"%ld", (long)button.tag]];
+            } else {
+                _btnStings = [NSString stringWithFormat:@"%ld", (long)button.tag];
+            }
             self.block(_btnStings);
         } else {
+            if (_btnStings.length > 0) {
+                _btnStings = [_btnStings stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%ld", (long)selecteBtnTag] withString:[NSString stringWithFormat:@"%ld", (long)button.tag]];
+            } else {
+                _btnStings = [NSString stringWithFormat:@"%ld", (long)button.tag];
+            }
             self.block(_btnStings);
         }
     }];

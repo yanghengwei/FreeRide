@@ -11,7 +11,7 @@
 typedef void(^Blo)(NSString *backInfo);
 
 @interface EvaluationView : UIView
-
+- (instancetype)initWithFrame:(CGRect)frame andString:(NSString *)data;
 @property (nonatomic, copy) Blo block;
 
 @end

@@ -22,6 +22,7 @@
     UIButton *button;
     UILabel *lastSmallLabel;
 }
+@property (nonatomic, strong) NSMutableDictionary *upDic;
 @end
 
 @implementation OrderInfoController
@@ -30,6 +31,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
+    _upDic = [[NSMutableDictionary alloc] init];
     [self createUI];
 }
 - (void)pushNextView:(NSString *)info {
@@ -68,7 +70,7 @@
     line.backgroundColor = COLOR_background;
     [self.view addSubview:line];
     
-    PayInfoView *payView = [[PayInfoView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(line.frame)+YMAKENEW(10), self.view.frame.size.width, 190) andTyep:@"short"];
+    PayInfoView *payView = [[PayInfoView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(line.frame)+YMAKENEW(10), self.view.frame.size.width, 180) andTyep:@"short"];
     [self.view addSubview:payView];
     
     
@@ -85,6 +87,7 @@
     [button setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(goToEvaluation) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
+    button.hidden = YES;
     [self.view addSubview:button];
     
     loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(lastSmallLabel.frame), CGRectGetMaxY(lastSmallLabel.frame), lastSmallLabel.frame.size.width, YMAKENEW(40))];
@@ -98,14 +101,18 @@
     [self.view addSubview:loginBtn];
 }
 - (void)goToEvaluation {
-    EvaluationChooseView *view = [[EvaluationChooseView alloc] initWithFrame:self.view.bounds];
+    EvaluationChooseView *view = [[EvaluationChooseView alloc] initWithFrame:self.view.bounds andData:_upDic];
+    view.blockInfo = ^(NSDictionary *backInfo) {
+        [_upDic setDictionary:backInfo];
+        [button setTitle:@"查看评价 >" forState:UIControlStateNormal];
+    };
     [self.view addSubview:view];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (1) {
-        button.hidden = YES;
-    }
+//    if (1) {
+//        button.hidden = YES;
+//    }
 }
 - (void)tagerLoginBtn {
     loginBtn.hidden = YES;
