@@ -14,7 +14,7 @@
 #import "FRReleaseController.h"
 #import "TheOrderController.h"
 #import "ConfirmCustersView.h"
-
+#import "UserDefaults.h"
 @interface DriverController () <UITableViewDelegate, UITableViewDataSource>
 {
     UIView *backView;
@@ -195,22 +195,39 @@
     headView.backgroundColor = [UIColor whiteColor];
     //司机头像
     UIImageView *headIamgeView = [[UIImageView alloc] initWithFrame:CGRectMake(XMAKENEW(15), YMAKENEW(10), XMAKENEW(38), XMAKENEW(38))];
-    headIamgeView.image = [UIImage imageNamed:@"bg_certification"];
+    headIamgeView.image = [UIImage imageWithData:[UserDefaults getValueForKey:@"headImage"]];
     [headIamgeView.layer setCornerRadius:headIamgeView.frame.size.width/2];
     [headIamgeView.layer setMasksToBounds:YES];
     [headView addSubview:headIamgeView];
     //司机姓名
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headIamgeView.frame)+XMAKENEW(5), CGRectGetMinY(headIamgeView.frame)-YMAKENEW(1), XMAKENEW(45), XMAKENEW(24))];
-    nameLabel.text = @"吴师傅";
-    nameLabel.adjustsFontSizeToFitWidth = YES;
+    UILabel *nameLabel = [[UILabel alloc] init];
+    nameLabel.text = [UserDefaults getValueForKey:@"nick_name"];
+//WithFrame:CGRectMake(CGRectGetMaxX(headIamgeView.frame)+XMAKENEW(5), CGRectGetMinY(headIamgeView.frame)-YMAKENEW(1), XMAKENEW(45), XMAKENEW(24))];
+    UIFont *fnt = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    nameLabel.font = fnt;
+    // 根据字体得到NSString的尺寸
+    CGSize size = [nameLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:fnt,NSFontAttributeName, nil]];
+    CGFloat nameW = size.width;
+    nameLabel.frame = CGRectMake(CGRectGetMaxX(headIamgeView.frame)+XMAKENEW(5), CGRectGetMinY(headIamgeView.frame)-YMAKENEW(1), nameW, XMAKENEW(24));
+    
+//    nameLabel.adjustsFontSizeToFitWidth = YES;
     [headView addSubview:nameLabel];
     //司机性别
     UIImageView *maleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame), CGRectGetMinY(nameLabel.frame)+XMAKENEW(5), nameLabel.frame.size.height-XMAKENEW(8), nameLabel.frame.size.height-XMAKENEW(8))];
-    maleImageView.image = [UIImage imageNamed:@"boy"];
+    if ([[UserDefaults getValueForKey:@"sex"] isEqualToString:@"1"]) {
+        maleImageView.image = [UIImage imageNamed:@"boy"];
+    } else {
+        maleImageView.image = [UIImage imageNamed:@"girl"];
+    }
     [headView addSubview:maleImageView];
     //司机车牌
-    UILabel *carIdLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(maleImageView.frame), CGRectGetMinY(nameLabel.frame)+4.5, XMAKENEW(65), maleImageView.frame.size.height)];
-    carIdLabel.text = @"晋A66666";
+    UILabel *carIdLabel = [[UILabel alloc] init];
+    carIdLabel.text = [UserDefaults getValueForKey:@"license_plate"];
+    carIdLabel.font = fnt;
+    // 根据字体得到NSString的尺寸
+    CGSize carIDsize = [carIdLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:fnt,NSFontAttributeName, nil]];
+    CGFloat carIDnameW = carIDsize.width;
+    carIdLabel.frame = CGRectMake(CGRectGetMaxX(maleImageView.frame), CGRectGetMinY(nameLabel.frame)+4.5, carIDnameW, maleImageView.frame.size.height);
     carIdLabel.adjustsFontSizeToFitWidth = YES;
     carIdLabel.backgroundColor = COLOR_TEXT_LIGHT;
     carIdLabel.textColor = COLOR_TEXT_DARK;
@@ -218,7 +235,7 @@
     [headView addSubview:carIdLabel];
     //汽车信息
     UILabel *carInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(nameLabel.frame), CGRectGetMaxY(nameLabel.frame)-YMAKENEW(3), self.view.frame.size.width, nameLabel.frame.size.height)];
-    carInfoLabel.text = @"上汽大通G10    白色    商务车";
+    carInfoLabel.text = [NSString stringWithFormat:@"%@  %@  %@",[UserDefaults getValueForKey:@"brand_name"],[UserDefaults getValueForKey:@"vehicle_brand"],[UserDefaults getValueForKey:@"vehicle_color"]];
     carInfoLabel.textColor = COLOR_TEXT_NORMAL;
     carInfoLabel.font = [UIFont systemFontOfSize:FONT12];
     [headView addSubview:carInfoLabel];

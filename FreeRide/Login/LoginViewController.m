@@ -174,6 +174,9 @@
 - (void)savePersonInfo:(NSDictionary *)personDic {
     NSArray *arr = [personDic allKeys];
     for (NSString *key in arr) {
+        if ([key isEqualToString:@"phone"]) {
+            continue;
+        }
         [UserDefaults saveValue:[personDic objectForKey:key] forKey:key];
     }
     [self downImageFromWeb];
