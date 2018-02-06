@@ -48,7 +48,7 @@
     }
     self.navigationController.navigationBarHidden = YES;
     // Do any additional setup after loading the view.
-    NaviView *navi = [[NaviView alloc] initWithFrame:CGRectMake(0, 20, XMAKENEW(375), Height_NavBar) andName:@"乘客" andTyep:@"personalCenter"];
+    NaviView *navi = [[NaviView alloc] initWithFrame:CGRectMake(0, 20, XMAKENEW(375), SCREEN_HEGHT) andName:@"乘客" andTyep:@"personalCenter"];
     navi.block = ^(NSString *backInfo){
         NSLog(@"%@",backInfo);
         [self pushNextView:backInfo];
@@ -125,7 +125,9 @@
         imageView.image = [UIImage imageNamed:@"bg_certification"];
         stateBtn.hidden = YES;
     }
-    
+    [UserDefaults saveValue:[dic objectForKey:@"vehicle_color"] forKey:@"vehicle_color"];
+    [UserDefaults saveValue:[dic objectForKey:@"vehicle_brand"] forKey:@"vehicle_brand"];
+    [UserDefaults saveValue:[dic objectForKey:@"license_plate"] forKey:@"license_plate"];
 }
 - (void)pushNextView:(NSString *)info {
     if ([info isEqualToString:@"back"]) {
@@ -373,8 +375,8 @@
     if (button.tag == 1111) {
         NSLog(@"点击常用线路管理");
     } else {
-        NSArray *arr = @[];
-        NSLog(@"%@", arr[1]);
+//        NSArray *arr = @[];
+//        NSLog(@"%@", arr[1]);
         NSLog(@"点击顺路合乘管理");
     }
 }
